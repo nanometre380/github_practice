@@ -1,0 +1,19 @@
+<h1>여기는 게시물 목록이 나올 페이지 입니다!</h1>
+<a href ="/home/new">새로운 글 쓰기</a>
+
+<br><br>
+<%@posts.each do |x|%>
+제목 : <%=x.title%><br>
+내용 : <%=x.content%><br>
+<a href = '/home/destroy/<%=x.id%>' style ='text-decoration:none;'>삭제</a><br>
+<a href = '/home/edit/<%=x.id%>' style='text-decoration:none;'>수정</a><br>
+<form action='/posts/<%=x.id%>/comments/create' method="POST">
+    <textarea name="content"></textarea>
+    <input type="submit" value="댓글쓰기"><br>
+</form>
+
+<%x.comments.each do |comment|%>
+<%=comment.content%><a href="/posts/<%=x.id%>/comments/<%=comment.id%>">[삭제]</a><br>
+<%end%>
+<hr>
+<%end%>
